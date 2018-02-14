@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
-	public float xSpeed =.1f;
+	public float xSpeed =.4f;
 	SpriteRenderer mySpriteRenderer2;
 	Rigidbody2D  myRigidbody; 
 	bool isOnGround = true;
