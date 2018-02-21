@@ -7,9 +7,12 @@ public class Guard : MonoBehaviour {
 	public float speed = 5;
 	public float waitTime = .3f;
 
+
 	public Transform pathHolder;
 
 	void Start(){
+
+
 
 		Vector3[] waypoints = new Vector3[pathHolder.childCount];
 		for (int i = 0; i < waypoints.Length; i++) {
@@ -47,5 +50,6 @@ public class Guard : MonoBehaviour {
 		}
 		Gizmos.DrawLine (previousPosition, startPosition);
 	}
+		
 
 }

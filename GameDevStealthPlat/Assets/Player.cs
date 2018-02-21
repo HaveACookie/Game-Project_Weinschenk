@@ -7,6 +7,7 @@ public class Player : MonoBehaviour {
 	SpriteRenderer mySpriteRenderer2;
 	Rigidbody2D  myRigidbody; 
 	bool isOnGround = true;
+	bool movingRight = true; 
 	//public float fallMultiplier = .1f; 
 	//public float lowJumpMultiplier = 2f;
 	//public float jumpVelocity; 
@@ -21,21 +22,22 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetKey (KeyCode.RightArrow)) {
+		//if (Input.GetKey (KeyCode.RightArrow)) {
 			//transform.position += xSpeed *Time.deltaTime * Vector3.right;
-			myRigidbody.velocity = new Vector2 (xSpeed, myRigidbody.velocity.y);
-			mySpriteRenderer2.flipX = false;
+			//myRigidbody.velocity = new Vector2 (xSpeed, myRigidbody.velocity.y);
+
+			//mySpriteRenderer2.flipX = false;
 			//bulletRight = true; 
 
-		}  else if (Input.GetKey (KeyCode.LeftArrow)) {
-			transform.position -= xSpeed *Time.deltaTime * Vector3.right;
-			myRigidbody.velocity = new Vector2 (-xSpeed, myRigidbody.velocity.y);
-			mySpriteRenderer2.flipX = true;
+		//} // else if (Input.GetKey (KeyCode.LeftArrow)) {
+			//transform.position -= xSpeed *Time.deltaTime * Vector3.right;
+			//myRigidbody.velocity = new Vector2 (-xSpeed, myRigidbody.velocity.y);
+		//	mySpriteRenderer2.flipX = true;
 			//bulletRight = false;
-		}  
-		else {
-			myRigidbody.velocity = new Vector2 (0, myRigidbody.velocity.y);
-		}
+		//}  
+		//else {
+			//myRigidbody.velocity = new Vector2 (0, myRigidbody.velocity.y);
+		//}
 		if (Input.GetKeyDown (KeyCode.Space ) && isOnGround){
 			Debug.Log ("is on ground: " + isOnGround);
 			//if (myRigidbody.velocity.y < 0){
@@ -48,6 +50,29 @@ public class Player : MonoBehaviour {
 
 
 }
+
+	void FixedUpdate () {
+
+		//float h = Input.GetAxis ("Horizontal");
+		//myRigidbody.AddForce ((Vector2.right * xSpeed) * h); 
+
+		if (Input.GetKey (KeyCode.RightArrow)) {
+		transform.position += xSpeed *Time.deltaTime * Vector3.right;
+		myRigidbody.velocity = new Vector2 (xSpeed, myRigidbody.velocity.y);
+
+		mySpriteRenderer2.flipX = false;
+		//bulletRight = true; 
+
+		}  else if (Input.GetKey (KeyCode.LeftArrow)) {
+		transform.position -= xSpeed *Time.deltaTime * Vector3.right;
+		myRigidbody.velocity = new Vector2 (-xSpeed, myRigidbody.velocity.y);
+			mySpriteRenderer2.flipX = true;
+		//bulletRight = false;
+		}  
+		else {
+		myRigidbody.velocity = new Vector2 (0, myRigidbody.velocity.y);
+		}
+	}
 
 	void OnCollisionEnter2D(Collision2D CollisionInfo){
 		if (CollisionInfo.gameObject.tag == "Floor") {
