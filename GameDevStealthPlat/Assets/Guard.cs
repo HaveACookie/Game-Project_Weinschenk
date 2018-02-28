@@ -11,7 +11,7 @@ public class Guard : MonoBehaviour {
 	public Transform pathHolder;
 
 	void Start(){
-
+		
 
 
 		Vector3[] waypoints = new Vector3[pathHolder.childCount];
@@ -50,6 +50,8 @@ public class Guard : MonoBehaviour {
 		}
 		Gizmos.DrawLine (previousPosition, startPosition);
 	}
+
+
 		
 
 }

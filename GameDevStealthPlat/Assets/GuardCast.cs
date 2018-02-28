@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GuardCast : MonoBehaviour {
 	public Transform sightStart, sightEnd;
@@ -13,6 +14,7 @@ public class GuardCast : MonoBehaviour {
 	public bool rSpotted = false;
 	public bool lSoftAlert = false; 
 	public bool rSoftAlert = false; 
+	public bool gameOverz= false; 
 	// Use this for initialization
 	void Start () {
 		
@@ -21,6 +23,8 @@ public class GuardCast : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		Raycasting ();
+
+
 	}
 
 	void Raycasting(){
@@ -34,6 +38,14 @@ public class GuardCast : MonoBehaviour {
 		lSoftAlert = Physics2D.Linecast (lSoftStart.position, lSoftEnd.position, 1<< LayerMask.NameToLayer("Player"));
 		Debug.DrawLine (rSoftStart.position, rSoftEnd.position, Color.white);
 		rSoftAlert = Physics2D.Linecast (rSoftStart.position, rSoftEnd.position, 1<< LayerMask.NameToLayer("Player"));
+	}
+
+	void gameOver(){
+		if (spotted) {
+
+			gameOverz = true; 
+		}
+
 	}
 
 }
