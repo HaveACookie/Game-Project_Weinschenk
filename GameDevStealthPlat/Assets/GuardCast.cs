@@ -23,6 +23,7 @@ public class GuardCast : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		Raycasting ();
+		gameOver ();
 
 
 	}
@@ -41,11 +42,15 @@ public class GuardCast : MonoBehaviour {
 	}
 
 	void gameOver(){
-		if (spotted) {
+		if (spotted || lSpotted || rSpotted) {
 
 			gameOverz = true; 
 		}
-
+		if (gameOverz == true) {
+			
+			//WaitForSeconds(3);
+			SceneManager.LoadScene (2);
+		}
 	}
 
 }
