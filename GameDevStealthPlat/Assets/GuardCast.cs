@@ -14,9 +14,11 @@ public class GuardCast : MonoBehaviour {
 	public bool rSpotted = false;
 	public bool lSoftAlert = false; 
 	public bool rSoftAlert = false; 
-	public bool gameOverz= false; 
-	// Use this for initialization
-	void Start () {
+	public bool gameOverz= false;
+    public AudioClip softAlert;
+    public AudioSource enemyAudio;
+    // Use this for initialization
+    void Start () {
 		
 	}
 
@@ -46,6 +48,10 @@ public class GuardCast : MonoBehaviour {
 
 			gameOverz = true; 
 		}
+        if (lSoftAlert || rSoftAlert)
+        {
+            enemyAudio.PlayOneShot(softAlert);
+        }
 		if (gameOverz == true) {
 			
 			//WaitForSeconds(3);
