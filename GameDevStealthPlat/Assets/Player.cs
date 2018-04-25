@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 [RequireComponent(typeof(AudioSource))]
 public class Player : MonoBehaviour {
     public float xSpeed;
@@ -22,10 +23,12 @@ public class Player : MonoBehaviour {
 	public AudioClip landing;
 	public AudioSource playerAudio;
 	public bool movingleft;
-	public bool movingright;
+	public bool MovingRight;
 	private Animator anim;
     public GameObject Item;
     public AudioClip Walk;
+    public AudioClip PortalOpened;
+    public GameObject Portals;
 	//public float fallMultiplier = .1f; 
 	//public float lowJumpMultiplier = 2f;
 	//public float jumpVelocity; 
@@ -69,11 +72,12 @@ public class Player : MonoBehaviour {
 
 		if (Input.GetKeyDown (KeyCode.Space ) && isOnGround ){
 			Debug.Log ("is on ground: " + isOnGround);
+            isOnGround = false;
 			//if (myRigidbody.velocity.y < 0){
 			//	myRigidbody.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1);
 			//}
 			myRigidbody.velocity = new Vector2 (myRigidbody.velocity.x, 8);
-            GetComponent<Animator>().SetBool(1, true);
+            GetComponent<Animator>().SetBool("Jumping", true);
 
 
 	}
@@ -101,18 +105,26 @@ public class Player : MonoBehaviour {
 		if (Input.GetKey (KeyCode.RightArrow)) {
 		myRigidbody.velocity = new Vector2 (xSpeed, myRigidbody.velocity.y);
 		facingRight = true;
-			movingright = true;
-			anim.SetBool ("MovingRight", movingright);
+			MovingRight = true;
+            if (MovingRight == true)
+            {
+                GetComponent<Animator>().SetBool("MovingRight", true);
+            }
+            mySpriteRenderer2.flipX = false;
 
 		}  else if (Input.GetKey (KeyCode.LeftArrow)) {
 		myRigidbody.velocity = new Vector2 (-xSpeed, myRigidbody.velocity.y);
 		facingLeft = true; 
-			movingleft = true;
-			anim.SetBool ("MovingLeft", movingleft);
-		}  
+			MovingRight = true;
+			GetComponent<Animator>().SetBool ("MovingRight", true);
+            mySpriteRenderer2.flipX = true;
+
+        }  
 		else {
 		myRigidbody.velocity = new Vector2 (0, myRigidbody.velocity.y);
-		}
+            MovingRight = false;
+            GetComponent<Animator>().SetBool("MovingRight", false);
+        }
 	}
 
 	void OnCollisionEnter2D(Collision2D CollisionInfo){
@@ -122,6 +134,15 @@ public class Player : MonoBehaviour {
 			dustParticle.GetComponent<ParticleSystem> ().enableEmission = true; 
 			StartCoroutine (endParticles ());
 			playerAudio.PlayOneShot (landing);
+            GetComponent<Animator>().SetBool("Jumping", false);
+            if (isOnGround == true)
+            {
+                GetComponent<Animator>().SetBool("Landing", true);
+            }
+            if(isOnGround == false)
+            {
+                GetComponent<Animator>().SetBool("Landing", false);
+            }
 		}
 		if (CollisionInfo.gameObject.tag == "Wall") {
 			wallChecks = true; 
@@ -130,9 +151,27 @@ public class Player : MonoBehaviour {
 		if (CollisionInfo.gameObject.tag == "Key") {
 			DestroyObject (door);
 		}
+        if (CollisionInfo.gameObject.tag == "Interactable")
+        {
+            GameManager.Instance.itemConsumed = true;
+            if (GameManager.Instance.itemConsumed = true)
+            {
+                Portals.SetActive(true);
+                Destroy(Item);
+                playerAudio.PlayOneShot(PortalOpened);
+            }
+            
+
+        }
+
 		if (CollisionInfo.gameObject.tag == "Winner"){
-			//SceneManager.LoadScene(); 
+			SceneManager.LoadScene(3); 
 		}
+
+        if (CollisionInfo.gameObject.tag == "Death")
+        {
+            SceneManager.LoadScene(4); 
+        }
 
 	}
 

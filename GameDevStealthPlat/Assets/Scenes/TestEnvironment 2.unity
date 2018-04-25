@@ -927,6 +927,9 @@ MonoBehaviour:
   lSoftAlert: 0
   rSoftAlert: 0
   gameOverz: 0
+  softAlert: {fileID: 0}
+  enemyAudio: {fileID: 0}
+  Exclaim: {fileID: 0}
 --- !u!114 &220261283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6927,6 +6930,9 @@ MonoBehaviour:
   lSoftAlert: 0
   rSoftAlert: 0
   gameOverz: 0
+  softAlert: {fileID: 0}
+  enemyAudio: {fileID: 0}
+  Exclaim: {fileID: 0}
 --- !u!1 &1461547519
 GameObject:
   m_ObjectHideFlags: 0

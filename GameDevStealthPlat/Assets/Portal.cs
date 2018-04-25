@@ -16,7 +16,7 @@ public class Portal : MonoBehaviour {
     {
         if( CollisionInfo.gameObject.tag == "Player")
         {
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 

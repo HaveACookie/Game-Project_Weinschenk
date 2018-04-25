@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     public float pXSpeed { get; set; }
     public bool PlayerSpotted { get; set; }
     public bool itemConsumed { get; set; }
+    public int timer { get; set;  }
 
 
 

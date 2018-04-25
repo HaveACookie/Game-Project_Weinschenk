@@ -17,6 +17,7 @@ public class GuardCast : MonoBehaviour {
 	public bool gameOverz= false;
     public AudioClip softAlert;
     public AudioSource enemyAudio;
+    public GameObject Exclaim;
     // Use this for initialization
     void Start () {
 		
@@ -51,11 +52,16 @@ public class GuardCast : MonoBehaviour {
         if (lSoftAlert || rSoftAlert)
         {
             enemyAudio.PlayOneShot(softAlert);
+            Exclaim.SetActive(true);
+        }
+        if(!lSoftAlert || !rSoftAlert)
+        {
+            Exclaim.SetActive(false);
         }
 		if (gameOverz == true) {
 			
 			//WaitForSeconds(3);
-			SceneManager.LoadScene (2);
+			SceneManager.LoadScene (4);
 		}
 	}
 

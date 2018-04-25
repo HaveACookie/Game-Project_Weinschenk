@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Floor
   - Wall
+  - Interactable
+  - Death
+  - Winner
   layers:
   - Default
   - TransparentFX
@@ -18,7 +21,7 @@ TagManager:
   - Player
   - Guard
   - Item
-  - 
+  - Interactable
   - 
   - 
   - 
